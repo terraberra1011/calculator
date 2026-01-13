@@ -55,3 +55,55 @@ body {
 .zero {
   grid-column: span 2;
 }
+
+.history {
+  background: #2b2b2b;
+  border-top: 1px solid #444;
+  padding: 12px;
+}
+
+.history__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.history__title {
+  font-size: 1rem;
+  color: #ddd;
+  margin: 0;
+}
+
+.history__clear {
+  border: none;
+  background: #555;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.history__clear:hover {
+  background: #666;
+}
+
+.history__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.history__item {
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: #eee;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+.history__item:hover {
+  background: #3a3a3a;
+}

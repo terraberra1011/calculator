@@ -1,8 +1,12 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn, .btn-operator, .btn-equals');
+const historyList = document.getElementById('historyList');
+const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
 let currentInput = '';
 let previousInput = '';
 let operator = null;
+let history = [];
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
@@ -42,6 +46,10 @@ function handleOperator(op) {
 function calculate() {
   if (operator === null || currentInput === '' || previousInput === '') return;
 
+  const prevRaw = previousInput;
+  const currRaw = currentInput;
+  const opRaw = operator;
+
   const prev = parseFloat(previousInput);
   const curr = parseFloat(currentInput);
 
@@ -60,6 +68,8 @@ function calculate() {
       result = curr === 0 ? 'Error' : prev / curr;
       break;
   }
+
+  addHistoryEntry(prevRaw, opRaw, currRaw, result);
 
   currentInput = result.toString();
   operator = null;
@@ -80,6 +90,49 @@ function updateDisplay() {
     display.textContent = currentInput || previousInput || '0';
 }
 
+function renderHistory() {
+  historyList.innerHTML = '';
+
+  history.forEach(item => {
+    const li = document.createElement('li');
+    li.classList.add('history__item');
+    li.textContent = item.label;
+
+    li.addEventListener('click', () => {
+      loadHistoryItem(item);
+    });
+
+    historyList.appendChild(li);
+  });
+}
+
+function addHistoryEntry(prev, op, curr, result) {
+  const entry = {
+    label: `${prev} ${op} ${curr} = ${result}`,
+    result: result.toString()
+  };
+
+  history.unshift(entry);
+  renderHistory();
+}
+
+function loadHistoryItem(item) {
+  currentInput = item.result;
+  previousInput = '';
+  operator = null;
+
+  if (typeof expression !== 'undefined') {
+    expression.textContent = item.label;
+  }
+
+  updateDisplay();
+}
+
+clearHistoryBtn.addEventListener('click', () => {
+  history = [];
+  renderHistory();
+});
+
 document.addEventListener('keydown', e => {
   const key = e.key;
 
@@ -88,6 +141,4 @@ document.addEventListener('keydown', e => {
   if (key === 'Enter' || key === '=') calculate();
   if (key === 'Backspace') deleteLast();
   if (key === 'Escape') clearAll();
-
-  updateDisplay();
 });

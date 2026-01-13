@@ -9,6 +9,8 @@ A simple, functional calculator built with HTML, CSS, and vanilla JavaScript.
 - Keyboard support for faster input
 - Delete and clear functions
 - Decimal point support
+- Calculation history with ability to clear
+- Fully functional button controls
 
 ## Usage
 
@@ -37,6 +39,12 @@ Simply open `index.html` in your web browser to use the calculator.
 ## Live Demo
 
 Open `index.html` in any modern web browser to try it out!
+
+## Recent Updates
+
+- Fixed button event listeners - all operator buttons now properly respond to clicks
+- Fixed equals button functionality with corrected class name consistency
+- Restructured JavaScript to prevent scope issues with event listeners
 
 ## Technologies Used
 

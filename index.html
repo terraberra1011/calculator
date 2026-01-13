@@ -12,8 +12,8 @@
         <div class="buttons">
             <button class="btn" data-action="clear">C</button>
             <button class="btn" data-action="delete">Del</button>
-            <button class="btn operator" data-operator="/">÷</button>
-            <button class="btn operator" data-operator="*">×</button>
+            <button class="btn-operator" data-operator="/">÷</button>
+            <button class="btn-operator" data-operator="*">×</button>
  
             <button class="btn number">7</button>
             <button class="btn number">8</button>
@@ -33,6 +33,14 @@
             <button class="btn number zero">0</button>
             <button class="btn number">.</button>
         </div>
+    </div>
+    <div class="history">
+      <div class="history__header">
+        <h2 class="history__title">History</h2>
+        <button class="history__clear" id="clearHistoryBtn">Clear</button>
+      </div>
+
+      <ul class="history__list" id="historyList"></ul>
     </div>
     <script src="script.js"></script>
   </body>
