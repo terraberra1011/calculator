@@ -93,15 +93,34 @@ function updateDisplay() {
 function renderHistory() {
   historyList.innerHTML = '';
 
-  history.forEach(item => {
+  history.forEach((item, index) => {
     const li = document.createElement('li');
     li.classList.add('history__item');
-    li.textContent = item.label;
 
-    li.addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.classList.add('history__row');
+
+    const label = document.createElement('span');
+    label.classList.add('history__label');
+    label.textContent = item.label;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('history__delete');
+    deleteBtn.type = 'button';
+    deleteBtn.textContent = '🗑';
+
+    label.addEventListener('click', () => {
       loadHistoryItem(item);
     });
 
+    deleteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      deleteHistoryEntry(index);
+    });
+
+    row.appendChild(label);
+    row.appendChild(deleteBtn);
+    li.appendChild(row);
     historyList.appendChild(li);
   });
 }
@@ -142,3 +161,8 @@ document.addEventListener('keydown', e => {
   if (key === 'Backspace') deleteLast();
   if (key === 'Escape') clearAll();
 });
+
+function deleteHistoryEntry(index) {
+  history.splice(index, 1);
+  renderHistory();
+}
