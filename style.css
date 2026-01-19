@@ -43,11 +43,11 @@ body {
   background: #555;
 }
 
-.operator {
+.btn-operator {
   background: #f39c12;
 }
 
-.equals {
+.btn-equals {
   background: #27ae60;
   grid-row: span 2;
 }
@@ -133,4 +133,15 @@ body {
 
 .history__delete:hover {
   background: #8a3a3a;
+}
+
+.history__item {
+  transition: opacity 200ms ease, transform 200ms ease;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.history__item--removing {
+  opacity: 0;
+  transform: translateX(-12px);
 }

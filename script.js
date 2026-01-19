@@ -113,9 +113,14 @@ function renderHistory() {
       loadHistoryItem(item);
     });
 
-    deleteBtn.addEventListener('click', e => {
+    deleteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      deleteHistoryEntry(index);
+
+      li.classList.add('history__item--removing');
+
+      li.addEventListener('transitionend', () => {
+        deleteHistoryEntry(index);
+      }, { once: true });
     });
 
     row.appendChild(label);

@@ -46,6 +46,11 @@ Open `index.html` in any modern web browser to try it out!
 
 ## Recent Updates
 
+### January 19, 2026
+- Fixed history entry deletion animation by correcting event listener from `'transitioned'` to `'transitionend'`, enabling smooth fade-out and slide-left animation before removal
+- History section now properly shrinks when entries are deleted with smooth visual feedback
+
+### Previous Updates
 - Fixed button event listeners - all operator buttons now properly respond to clicks
 - Fixed equals button functionality with corrected class name consistency
 - Restructured JavaScript to prevent scope issues with event listeners
