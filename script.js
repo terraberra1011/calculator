@@ -2,11 +2,16 @@ const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn, .btn-operator, .btn-equals');
 const historyList = document.getElementById('historyList');
 const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+const undoBar = document.getElementById('undoBar');
+const undoText = document.getElementById('undoText');
+const undoBtn = document.getElementById('undoBtn');
 
 let currentInput = '';
 let previousInput = '';
 let operator = null;
 let history = [];
+let lastDeleted = null;
+let undoTimerId = null;
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
@@ -152,6 +157,43 @@ function loadHistoryItem(item) {
   updateDisplay();
 }
 
+function showUndoBar(entry, index) {
+  lastDeleted = [ entry, index ];
+
+  undoText.textContent = `Deleted: ${entry.label}`;
+   undoBar.hidden = false;
+
+  if (undoTimerId !== null) {
+    clearTimeout(undoTimerId);
+  }
+
+  undoTimerId = setTimeout(() => {
+    hideUndoBar();
+    lastDeleted = null;
+  }, 5000);
+}
+
+function hideUndoBar() {
+  undoBar.hidden = true;
+
+  if (undoTimerId !== null) {
+    clearTimeout(undoTimerId);
+    undoTimerId = null;
+  }
+}
+
+undoBtn.addEventListener('click', () => {
+  if (!lastDeleted) return;
+
+  const [entry, index] = lastDeleted;
+
+  history.splice(index, 0, entry);
+  renderHistory();
+
+  hideUndoBar();
+  lastDeleted = null;
+});
+
 clearHistoryBtn.addEventListener('click', () => {
   history = [];
   renderHistory();
@@ -168,6 +210,10 @@ document.addEventListener('keydown', e => {
 });
 
 function deleteHistoryEntry(index) {
+  const deletedEntry = history[index];
+
   history.splice(index, 1);
   renderHistory();
+
+  showUndoBar(deletedEntry, index);
 }

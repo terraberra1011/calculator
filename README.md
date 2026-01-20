@@ -46,6 +46,11 @@ Open `index.html` in any modern web browser to try it out!
 
 ## Recent Updates
 
+### January 20, 2026
+- Fixed undo button functionality by correcting template literal syntax (using backticks instead of single quotes)
+- Fixed array destructuring in undo event listener to properly restore deleted history entries
+- Undo feature now works correctly when deleting history items
+
 ### January 19, 2026
 - Fixed history entry deletion animation by correcting event listener from `'transitioned'` to `'transitionend'`, enabling smooth fade-out and slide-left animation before removal
 - History section now properly shrinks when entries are deleted with smooth visual feedback
