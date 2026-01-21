@@ -139,6 +139,8 @@ body {
   transition: opacity 200ms ease, transform 200ms ease;
   opacity: 1;
   transform: translateX(0);
+  padding: 8px 10px;
+  border-radius: 6px;
 }
 
 .history__item--removing {
@@ -181,4 +183,30 @@ body {
 
 .undo__btn:hover {
   filter: brightness(1.05);
+}
+
+.history__item {
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    max-height 220ms ease,
+    margin 220ms ease,
+    padding 220ms ease;
+  opacity: 1;
+  transform: translateX(0);
+
+  max-height: 60px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.history__item--removing {
+  opacity: 0;
+  transform: translateX(-12px);
+
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }

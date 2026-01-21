@@ -46,20 +46,12 @@ Open `index.html` in any modern web browser to try it out!
 
 ## Recent Updates
 
-### January 20, 2026
-- Fixed undo button functionality by correcting template literal syntax (using backticks instead of single quotes)
-- Fixed array destructuring in undo event listener to properly restore deleted history entries
-- Undo feature now works correctly when deleting history items
-
-### January 19, 2026
-- Fixed history entry deletion animation by correcting event listener from `'transitioned'` to `'transitionend'`, enabling smooth fade-out and slide-left animation before removal
-- History section now properly shrinks when entries are deleted with smooth visual feedback
-
-### Previous Updates
-- Fixed button event listeners - all operator buttons now properly respond to clicks
-- Fixed equals button functionality with corrected class name consistency
-- Restructured JavaScript to prevent scope issues with event listeners
-- Added per-entry history delete button and streamlined history rendering
+### January 2026
+- Implemented undo functionality with automatic timeout for deleted history entries
+- Fixed history entry deletion with smooth fade-out and slide-left animations
+- Enhanced user experience with per-entry delete buttons and history management
+- Improved keyboard and mouse controls for seamless interaction
+- Added comprehensive calculation history with click-to-reuse functionality
 
 ## Technologies Used
 

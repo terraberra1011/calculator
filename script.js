@@ -118,15 +118,20 @@ function renderHistory() {
       loadHistoryItem(item);
     });
 
-    deleteBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
+  deleteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-      li.classList.add('history__item--removing');
+   li.classList.add('history__item--removing');
 
-      li.addEventListener('transitionend', () => {
-        deleteHistoryEntry(index);
-      }, { once: true });
-    });
+  function onTransitionEnd(event) {
+    if (event.propertyName !== 'max-height') return;
+
+    li.removeEventListener('transitionend', onTransitionEnd);
+    deleteHistoryEntry(index);
+  }
+
+  li.addEventListener('transitionend', onTransitionEnd);
+});
 
     row.appendChild(label);
     row.appendChild(deleteBtn);
