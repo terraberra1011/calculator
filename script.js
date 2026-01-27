@@ -5,6 +5,7 @@ const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 const undoBar = document.getElementById('undoBar');
 const undoText = document.getElementById('undoText');
 const undoBtn = document.getElementById('undoBtn');
+const themeToggle = document.getElementById('themeToggle');
 
 let currentInput = '';
 let previousInput = '';
@@ -12,6 +13,23 @@ let operator = null;
 let history = [];
 let lastDeleted = null;
 let undoTimerId = null;
+
+const savedTheme = localStorage.getItem('calculatorTheme');
+
+if (savedTheme === 'light') {
+  document.body.classList.add('light');
+  themeToggle.checked = true;
+}
+
+themeToggle.addEventListener('change', () => {
+  if (themeToggle.checked) {
+    document.body.classList.add('light');
+    localStorage.setItem('calculatorTheme', 'light');
+  } else {
+    document.body.classList.remove('light');
+    localStorage.setItem('calculatorTheme', 'dark');
+  }
+});
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {

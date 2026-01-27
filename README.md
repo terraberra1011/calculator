@@ -13,6 +13,7 @@ A simple, responsive calculator built with HTML, CSS, and vanilla JavaScript.
 - Decimals: input and compute fractional values.
 - Clear and Delete: `C` resets, `Del` removes last digit.
 - Keyboard support: digits, operators, Enter/Equal, Backspace, Escape.
+- Light/Dark theme toggle: switch between light and dark modes for comfortable viewing.
 - History: records expressions and results; click to reuse a result.
 - Per-entry delete: remove individual history rows with smooth animation.
 - Clear history: wipe the full list with one click.
@@ -45,8 +46,10 @@ A simple, responsive calculator built with HTML, CSS, and vanilla JavaScript.
 ## Recent Updates
 
 January 2026
-- Added undo bar with timed restore for deleted history entries.
+- Added light/dark theme toggle with optimized color contrast for readability.
+- Implemented undo bar with timed restore for deleted history entries.
 - Smooth fade + collapse animations for per-entry deletion.
+- Fixed keyboard shortcuts to update display and prevent browser defaults.
 - Click-to-reuse results in history; improved keyboard coverage.
 
 ## Tech
