@@ -186,23 +186,25 @@ body {
 }
 
 .history__item {
-  transition:
-    opacity 200ms ease,
-    transform 200ms ease,
-    max-height 220ms ease,
-    margin 220ms ease,
-    padding 220ms ease;
   opacity: 1;
   transform: translateX(0);
-
   max-height: 60px;
   overflow: hidden;
+
+  transition: opacity 180ms ease, transform 180ms ease;
+
+  padding: 8px 10px;
+  border-radius: 6px;
   margin: 0;
 }
 
-.history__item--removing {
+.history__item--fading {
   opacity: 0;
   transform: translateX(-12px);
+}
+
+.history__item--collapsing {
+  transition: max-height 220ms ease, padding 220ms ease, margin 220ms ease;
 
   max-height: 0;
   padding-top: 0;

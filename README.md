@@ -1,59 +1,55 @@
 # JavaScript Calculator
 
-A simple, functional calculator built with HTML, CSS, and vanilla JavaScript.
+A simple, responsive calculator built with HTML, CSS, and vanilla JavaScript.
+
+## Quick Start
+
+- Open `index.html` in any modern browser.
+- Or use VS Code's Live Server for auto-reload while editing.
 
 ## Features
 
--Provides full support for essential arithmetic operations, including addition, subtraction, multiplication, and division, ensuring accurate and reliable calculations
--Designed with a clean, modern interface featuring a sleek dark theme that reduces eye strain and enhances overall user experience
--Offers complete keyboard support, allowing users to enter numbers and operations quickly without relying solely on on-screen buttons
--Includes delete (backspace) and clear (reset) functions, giving users flexibility to correct mistakes or start fresh at any time
--Supports decimal point input for handling precise and fractional values in calculations
--Maintains a detailed calculation history that records past expressions and results for easy reference
--Allows users to clear the entire calculation history with a single action to keep the workspace organized
--Provides per-entry history management, including a trash button for deleting individual calculations without affecting the rest of the history
--Enables users to click on any previous result in the history to instantly reuse it in a new calculation, improving efficiency and workflow
--Features fully functional, responsive button controls that provide smooth interaction across different screen sizes and input methods
+- Basic ops: addition, subtraction, multiplication, division.
+- Decimals: input and compute fractional values.
+- Clear and Delete: `C` resets, `Del` removes last digit.
+- Keyboard support: digits, operators, Enter/Equal, Backspace, Escape.
+- History: records expressions and results; click to reuse a result.
+- Per-entry delete: remove individual history rows with smooth animation.
+- Clear history: wipe the full list with one click.
+- Undo delete: restore a deleted history entry within 5 seconds.
+- Responsive UI: buttons scale well on different screen sizes.
 
-## Usage
+## Keyboard Shortcuts
 
-Simply open `index.html` in your web browser to use the calculator.
+- Digits: `0-9`, decimal: `.`
+- Operators: `+`, `-`, `*`, `/`
+- Evaluate: `Enter` or `=`
+- Delete last: `Backspace`
+- Clear all: `Escape`
 
-### Mouse Controls
-- Click number buttons to input digits
-- Click operator buttons (+, -, ×, ÷) to perform operations
-- Click `=` to calculate the result
-- Click `C` to clear all
-- Click `Del` to delete the last digit
-- In History, click a row to reload its result, or click the trash icon to delete that entry
+## Project Structure
 
-### Keyboard Controls
-- Number keys (0-9) for digit input
-- `+`, `-`, `*`, `/` for operations
-- `Enter` or `=` to calculate
-- `Backspace` to delete last digit
-- `Escape` to clear all
+```
+.
+├── index.html   # Markup and layout
+├── style.css    # Styles and animations
+└── script.js    # Calculator logic + history/undo
+```
 
-## Files
+## Notes
 
-- `index.html` - Main HTML structure
-- `style.css` - Styling and layout
-- `script.js` - Calculator logic and functionality
-
-## Live Demo
-
-Open `index.html` in any modern web browser to try it out!
+- Division by zero returns `Error` and prevents invalid computation.
+- Clicking a history row loads its result into the display for reuse.
+- Deleted history entries can be undone for ~5s via the Undo bar.
 
 ## Recent Updates
 
-### January 2026
-- Implemented undo functionality with automatic timeout for deleted history entries
-- Fixed history entry deletion with smooth fade-out and slide-left animations
-- Enhanced user experience with per-entry delete buttons and history management
-- Improved keyboard and mouse controls for seamless interaction
-- Added comprehensive calculation history with click-to-reuse functionality
+January 2026
+- Added undo bar with timed restore for deleted history entries.
+- Smooth fade + collapse animations for per-entry deletion.
+- Click-to-reuse results in history; improved keyboard coverage.
 
-## Technologies Used
+## Tech
 
 - HTML5
 - CSS3

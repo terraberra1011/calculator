@@ -121,16 +121,21 @@ function renderHistory() {
   deleteBtn.addEventListener('click', (e) => {
     e.stopPropagation();
 
-   li.classList.add('history__item--removing');
+   li.classList.add('history__item--fading');
 
-  function onTransitionEnd(event) {
-    if (event.propertyName !== 'max-height') return;
+    function onFadeEnd(event) {
+      if (event.propertyName !== 'opacity') return;
+      li.removeEventListener('transitionend', onFadeEnd);
+      li.classList.add('history__item--collapsing');
 
-    li.removeEventListener('transitionend', onTransitionEnd);
-    deleteHistoryEntry(index);
+    function onCollapseEnd(event2) {
+      if (event2.propertyName !== 'max-height') return;
+      li.removeEventListener('transitionend', onCollapseEnd);
+      deleteHistoryEntry(index);
+    }
+    li.addEventListener('transitionend', onCollapseEnd);
   }
-
-  li.addEventListener('transitionend', onTransitionEnd);
+  li.addEventListener('transitionend', onFadeEnd);
 });
 
     row.appendChild(label);
@@ -206,12 +211,29 @@ clearHistoryBtn.addEventListener('click', () => {
 
 document.addEventListener('keydown', e => {
   const key = e.key;
+  let handled = false;
 
-  if (!isNaN(key) || key === '.') handleNumber(key);
-  if (['+', '-', '*', '/'].includes(key)) handleOperator(key);
-  if (key === 'Enter' || key === '=') calculate();
-  if (key === 'Backspace') deleteLast();
-  if (key === 'Escape') clearAll();
+  if (!isNaN(key) || key === '.') {
+    handleNumber(key);
+    handled = true;
+  } else if (['+', '-', '*', '/'].includes(key)) {
+    handleOperator(key);
+    handled = true;
+  } else if (key === 'Enter' || key === '=') {
+    calculate();
+    handled = true;
+  } else if (key === 'Backspace') {
+    deleteLast();
+    handled = true;
+  } else if (key === 'Escape') {
+    clearAll();
+    handled = true;
+  }
+
+  if (handled) {
+    e.preventDefault();
+    updateDisplay();
+  }
 });
 
 function deleteHistoryEntry(index) {
