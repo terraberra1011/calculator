@@ -12,7 +12,7 @@ clickSound.volume = 0.4;
 let currentInput = '';
 let previousInput = '';
 let operator = null;
-let history = [];
+let history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
 let lastDeleted = null;
 let undoTimerId = null;
 
@@ -45,7 +45,7 @@ buttons.forEach(button => {
       handleNumber(value);
     } else if (op) {
       handleOperator(op);
-    } else if (action === 'equals') {
+    } else if (action === 'equal') {
       calculate();
     } else if (action === 'clear') {
       clearAll();
@@ -179,6 +179,7 @@ function addHistoryEntry(prev, op, curr, result) {
   };
 
   history.unshift(entry);
+  localStorage.setItem('calculatorHistory', JSON.stringify(history));
   renderHistory();
 }
 
@@ -225,6 +226,7 @@ undoBtn.addEventListener('click', () => {
   const [entry, index] = lastDeleted;
 
   history.splice(index, 0, entry);
+  localStorage.setItem('calculatorHistory', JSON.stringify(history));
   renderHistory();
 
   hideUndoBar();
@@ -233,6 +235,7 @@ undoBtn.addEventListener('click', () => {
 
 clearHistoryBtn.addEventListener('click', () => {
   history = [];
+  localStorage.setItem('calculatorHistory', JSON.stringify(history));
   renderHistory();
 });
 
@@ -271,7 +274,11 @@ function deleteHistoryEntry(index) {
   const deletedEntry = history[index];
 
   history.splice(index, 1);
+  localStorage.setItem('calculatorHistory', JSON.stringify(history));
   renderHistory();
 
   showUndoBar(deletedEntry, index);
 }
+
+// Load history on page load
+renderHistory();
