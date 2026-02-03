@@ -6,6 +6,8 @@ const undoBar = document.getElementById('undoBar');
 const undoText = document.getElementById('undoText');
 const undoBtn = document.getElementById('undoBtn');
 const themeToggle = document.getElementById('themeToggle');
+const clickSound = new Audio('./click.mp3');
+clickSound.volume = 0.4;
 
 let currentInput = '';
 let previousInput = '';
@@ -32,25 +34,27 @@ themeToggle.addEventListener('change', () => {
 });
 
 buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const value = button.textContent;
-        const action = button.dataset.action;
-        const op = button.dataset.operator;
+  button.addEventListener('click', () => {
+    playClickSound();
 
-        if (button.classList.contains('number')) {
-            handleNumber(value);
-        } else if (op) {
-            handleOperator(op);
-        } else if (action === 'equal') {
-            calculate();
-        } else if (action === 'clear') {
-            clearAll();
-        } else if (action === 'delete') {
-            deleteLast();
-        }
+    const value = button.textContent;
+    const action = button.dataset.action;
+    const op = button.dataset.operator;
 
-        updateDisplay();
-    });
+    if (button.classList.contains('number')) {
+      handleNumber(value);
+    } else if (op) {
+      handleOperator(op);
+    } else if (action === 'equals') {
+      calculate();
+    } else if (action === 'clear') {
+      clearAll();
+    } else if (action === 'delete') {
+      deleteLast();
+    }
+
+    updateDisplay();
+  });
 });
 
 function handleNumber(value) {
@@ -163,6 +167,11 @@ function renderHistory() {
   });
 }
 
+function playClickSound() {
+  clickSound.currentTime = 0;
+  clickSound.play();
+}
+
 function addHistoryEntry(prev, op, curr, result) {
   const entry = {
     label: `${prev} ${op} ${curr} = ${result}`,
@@ -229,29 +238,33 @@ clearHistoryBtn.addEventListener('click', () => {
 
 document.addEventListener('keydown', e => {
   const key = e.key;
-  let handled = false;
 
   if (!isNaN(key) || key === '.') {
+    playClickSound();
     handleNumber(key);
-    handled = true;
-  } else if (['+', '-', '*', '/'].includes(key)) {
-    handleOperator(key);
-    handled = true;
-  } else if (key === 'Enter' || key === '=') {
-    calculate();
-    handled = true;
-  } else if (key === 'Backspace') {
-    deleteLast();
-    handled = true;
-  } else if (key === 'Escape') {
-    clearAll();
-    handled = true;
   }
 
-  if (handled) {
-    e.preventDefault();
-    updateDisplay();
+  if (['+', '-', '*', '/'].includes(key)) {
+    playClickSound();
+    handleOperator(key);
   }
+
+  if (key === 'Enter' || key === '=') {
+    playClickSound();
+    calculate();
+  }
+
+  if (key === 'Backspace') {
+    playClickSound();
+    deleteLast();
+  }
+
+  if (key === 'Escape') {
+    playClickSound();
+    clearAll();
+  }
+
+  updateDisplay();
 });
 
 function deleteHistoryEntry(index) {

@@ -45,12 +45,15 @@ A simple, responsive calculator built with HTML, CSS, and vanilla JavaScript.
 
 ## Recent Updates
 
-January 2026
-- Added light/dark theme toggle with optimized color contrast for readability.
-- Implemented undo bar with timed restore for deleted history entries.
-- Smooth fade + collapse animations for per-entry deletion.
-- Fixed keyboard shortcuts to update display and prevent browser defaults.
-- Click-to-reuse results in history; improved keyboard coverage.
+February 2026
+- Fully functional calculator with comprehensive features
+- Light/dark theme toggle with optimized color contrast for readability
+- Complete history system with per-entry deletion and undo functionality
+- Keyboard shortcuts for all operations with proper event handling
+- Responsive design for various screen sizes
+- Click-to-reuse results from history
+- Sound effects for button interactions
+- Local storage support for theme persistence
 
 ## Tech
 
